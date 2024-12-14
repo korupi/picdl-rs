@@ -1,6 +1,6 @@
 [package]
 name = "picdl-rs"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["corrupt"]
 edition = "2021"
 repository = "https://github.com/korupi/picdl-rs"
