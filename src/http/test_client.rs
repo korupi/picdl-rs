@@ -1,3 +1,5 @@
+use log::debug;
+
 use super::client::{Headers, HttpClient, Query};
 
 /// A test HTTP client. Will just print debug information

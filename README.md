@@ -1,6 +1,11 @@
 # picdl-rs
 A simple Rust library to download media from various services, such as Gelbooru.
 
+## Installation
+```sh
+cargo add picdl_rs
+```
+
 ## Examples
 ### Fetching one post by tags
 ```rust

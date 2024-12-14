@@ -1,4 +1,3 @@
-extern crate pretty_env_logger;
 pub mod error;
 
 use error::GelbooruError;
@@ -162,7 +161,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_gelbooru_fetch() {
-        pretty_env_logger::init();
+        let _ = pretty_env_logger::try_init();
         let client = Gelbooru::<ReqwestClient>::new();
         let result = client.fetch("omori", 1, 1, 0);
         debug!("{:?}", result.await);
