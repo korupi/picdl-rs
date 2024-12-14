@@ -15,6 +15,7 @@ pub enum ReqwestError {
     StatusCode(reqwest::Response),
 }
 
+/// Implementation of Default for ReqwestClient.
 impl Default for ReqwestClient {
     fn default() -> Self {
         let client = reqwest::ClientBuilder::new()
@@ -24,6 +25,7 @@ impl Default for ReqwestClient {
     }
 }
 
+/// Implements conversion of reqwest::Error to ReqwestError
 impl From<reqwest::Error> for ReqwestError {
     fn from(value: reqwest::Error) -> Self {
         ReqwestError::Client(value)

@@ -4,19 +4,17 @@ use error::GelbooruError;
 use serde::{Deserialize, Serialize};
 use super::http::{client::{Headers, HttpClient, Query}, reqwest::ReqwestClient};
 
-
 /// Gelbooru client struct
 ///
 /// # Example
 ///
 /// Using an async http client (reqwest)
 /// ```no_test
-/// let client = Gelbooru {
-///     http: picdl_rs::http::reqwest::ReqwestClient {}
-/// };
+/// let client = picdl_rs::gelbooru::Gelbooru::<picdl_rs::http::reqwest::ReqwestClient>::new();
 /// ```
 #[derive(Debug, Clone, Copy)]
 pub struct Gelbooru<Http: HttpClient> {
+    /// HTTP client to use
     http: Http,
 }
 
@@ -25,9 +23,13 @@ pub struct Gelbooru<Http: HttpClient> {
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
 pub enum Rating {
+    /// General rating (SFW)
     General,
+    /// Sensitive rating (Almost NSFW)
     Sensitive,
+    /// Explicit rating (NSFW)
     Explicit,
+    /// Questionable
     Questionable
 }
 
@@ -153,12 +155,14 @@ impl<Http: HttpClient> Gelbooru<Http>
     }
 }
 
+/// Tests module
 #[cfg(test)]
 mod tests {
     use log::debug;
     use crate::gelbooru::Gelbooru;
     use crate::http::reqwest::ReqwestClient;
 
+    /// Test if we correctly send a request and Gelbooru API correctly responds
     #[tokio::test]
     async fn test_gelbooru_fetch() {
         let _ = pretty_env_logger::try_init();

@@ -20,18 +20,21 @@ pub struct Boosty<Http: HttpClient> {
     http: Http,
 }
 
+/// Enum of possible errors
 #[derive(Debug)]
 pub enum BoostyError {
     HttpError(ReqwestError),
     SerdeError(serde_json::Error)
 }
 
+/// Implements conversion of ReqwestError to BoostyError
 impl From<ReqwestError> for BoostyError {
     fn from(value: ReqwestError) -> Self {
         Self::HttpError(value)
     }
 }
 
+/// Implements conversion of serde_json::Error to BoostyError
 impl From<serde_json::Error> for BoostyError {
     fn from(value: serde_json::Error) -> Self {
         Self::SerdeError(value)
@@ -46,6 +49,7 @@ impl<Http: HttpClient> Boosty<Http>
         Boosty{ http: <ReqwestClient as Default>::default() }
     }
 
+    /// Fetches a specific count (`limit` argument) posts from blog (`blog` argument)
     pub async fn fetch(&self, blog: &str, limit: i64) -> Result<Response, BoostyError> {
         let headers = Headers::new();
         let payload = Query::new();
