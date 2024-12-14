@@ -1,9 +1,11 @@
 [package]
 name = "picdl-rs"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["corrupt"]
 edition = "2021"
-
+repository = "https://github.com/korupi/picdl-rs"
+description = "A Rust library to download pictures from some services"
+license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

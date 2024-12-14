@@ -36,74 +36,74 @@ pub enum Rating {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Post {
     /// Post ID
-    id: i64,
+    pub id: i64,
     /// Post creation date, for example "Sat Dec 14 04:00:44 -0600 2024"
-    created_at: String,
+    pub created_at: String,
     /// Post score
-    score: i64,
+    pub score: i64,
     /// Width of image in `file_url`
-    width: i64,
+    pub width: i64,
     /// Height of image in `file_url`
-    height: i64,
+    pub height: i64,
     /// MD5 hash of post
-    md5: String,
+    pub md5: String,
     /// Gelbooru directory where image is stored
-    directory: String,
+    pub directory: String,
     /// Image filename 
-    image: String,
+    pub image: String,
     /// Image rating
-    rating: Rating,
+    pub rating: Rating,
     /// Image source (link to original post, author)
-    source: String,
+    pub source: String,
     /// Post edit UNIX date
-    change: Option<i64>,
+    pub change: Option<i64>,
     /// Post owner on Gelbooru
-    owner: String,
+    pub owner: String,
     /// Post creator ID on Gelbooru
-    creator_id: i64,
+    pub creator_id: i64,
     /// Post parent ID, 0 if no parent post
-    parent_id: i64,
+    pub parent_id: i64,
     /// Does this post have sample image
-    sample: i64,
+    pub sample: i64,
     /// Preview image height
-    preview_height: i64,
+    pub preview_height: i64,
     /// Preview image width
-    preview_width: i64,
+    pub preview_width: i64,
     /// Post tags
-    tags: String,
+    pub tags: String,
     /// Post title
-    title: String,
+    pub title: String,
     /// Does the post has notes (true/false but in String)
-    has_notes: String,
+    pub has_notes: String,
     /// Does the post has comments (true/false but in String)
-    has_comments: String,
+    pub has_comments: String,
     /// Original, full-size image url
-    file_url: String,
+    pub file_url: String,
     /// Preview url
-    preview_url: String,
+    pub preview_url: String,
     /// Sample url
-    sample_url: String,
+    pub sample_url: String,
     /// Sample image height
-    sample_height: i64,
+    pub sample_height: i64,
     /// Sample image width
-    sample_width: i64,
+    pub sample_width: i64,
     /// Post status
-    status: String,
+    pub status: String,
     /// Is the post locked
-    post_locked: i64,
+    pub post_locked: i64,
     /// Does the post has children
-    has_children: String
+    pub has_children: String
 }
 
 /// Gelbooru post attributes
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Attributes {
     /// Count of posts on this page (in this response)
-    limit: i64,
+    pub limit: i64,
     /// Post offset
-    offset: i64,
+    pub offset: i64,
     /// Count of posts to return
-    count: i64
+    pub count: i64
 }
 
 /// Gelbooru response
@@ -111,9 +111,9 @@ pub struct Attributes {
 pub struct Response {
     /// Response attributes, like `limit`, `offset` and `count`
     #[serde(rename(deserialize = "@attributes"))]
-    attributes: Attributes,
+    pub attributes: Attributes,
     /// Vector of `Post`
-    post: Vec<Post>,
+    pub post: Vec<Post>,
 }
 
 /// Gelbooru API client
@@ -149,7 +149,7 @@ impl<Http: HttpClient> Gelbooru<Http>
     /// # Arguments
     /// `tags` - tags to find post(s) by, meta tags such as `rating` are allowed 
     /// `pid` - page number
-    pub async fn fetch_all_posts(&self, tags: &str, pid: i64) -> Result<Response, GelbooruError> {
+    pub async fn fetch_by_tag(&self, tags: &str, pid: i64) -> Result<Response, GelbooruError> {
         self.fetch(tags, 100, pid, 0).await
     }
 }
